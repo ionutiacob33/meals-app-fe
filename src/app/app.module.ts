@@ -10,6 +10,7 @@ import {RecipeItemComponent} from './recipes/recipe-list/recipe-item/recipe-item
 import {RecipeService} from "./recipes/recipe.service";
 import {ShoppingListComponent} from './shopping-list/shopping-list.component';
 import {AuthComponent} from './auth/auth.component';
+import {ShoppingListService} from "./shopping-list/shopping-list.service";
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import {AuthComponent} from './auth/auth.component';
     AppRoutingModule
   ],
   providers: [
-    RecipeService
+    RecipeService,
+    ShoppingListService
   ],
   bootstrap: [AppComponent]
 })
