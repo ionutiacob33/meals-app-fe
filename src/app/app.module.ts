@@ -12,6 +12,7 @@ import {ShoppingListComponent} from './shopping-list/shopping-list.component';
 import {AuthComponent} from './auth/auth.component';
 import {ShoppingListService} from "./shopping-list/shopping-list.service";
 import {IngredientEditComponent} from './shopping-list/ingredient-edit/ingredient-edit.component';
+import { RecipeDetailsComponent } from './recipe-details/recipe-details.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import {IngredientEditComponent} from './shopping-list/ingredient-edit/ingredien
     RecipeItemComponent,
     ShoppingListComponent,
     AuthComponent,
-    IngredientEditComponent
+    IngredientEditComponent,
+    RecipeDetailsComponent
   ],
   imports: [
     BrowserModule,
