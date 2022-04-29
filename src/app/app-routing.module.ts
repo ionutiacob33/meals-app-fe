@@ -1,9 +1,9 @@
 import {NgModule} from "@angular/core";
 import {RouterModule, Routes} from "@angular/router";
-import {RecipesComponent} from "./recipes/recipes.component";
-import {ShoppingListComponent} from "./shopping-list/shopping-list.component";
-import {AuthComponent} from "./auth/auth.component";
-import {RecipeDetailsComponent} from "./recipe-details/recipe-details.component";
+import {RecipesComponent} from "./component/recipes/recipes.component";
+import {ShoppingListComponent} from "./component/shopping-list/shopping-list.component";
+import {AuthComponent} from "./component/auth/auth.component";
+import {RecipeDetailsComponent} from "./component/recipes/recipe-details/recipe-details.component";
 
 const appRoutes: Routes = [
   {
