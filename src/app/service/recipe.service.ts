@@ -1,6 +1,7 @@
 import {Injectable} from "@angular/core";
 import {Recipe} from "../model/recipe.model";
 import {Ingredient} from "../model/ingredient.model";
+import {Subject} from "rxjs";
 
 @Injectable()
 export class RecipeService {
@@ -43,6 +44,8 @@ export class RecipeService {
       ]
     )
   ];
+
+  recipeChanged = new Subject<Recipe[]>();
 
   getRecipes(): Recipe[] {
     return this.recipes.slice();
