@@ -13,6 +13,7 @@ import {AuthComponent} from './component/auth/auth.component';
 import {ShoppingListService} from "./service/shopping-list.service";
 import {IngredientEditComponent} from './component/shopping-list/ingredient-edit/ingredient-edit.component';
 import { RecipeDetailsComponent } from './component/recipes/recipe-details/recipe-details.component';
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { RecipeDetailsComponent } from './component/recipes/recipe-details/recip
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule
   ],
   providers: [
     RecipeService,
