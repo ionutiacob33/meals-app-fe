@@ -54,4 +54,15 @@ export class RecipeService {
   getRecipe(id: number) {
     return this.recipes[id];
   }
+
+  addRecipe(recipe: Recipe) {
+    recipe.id = this.recipes.length;
+    this.recipes.push(recipe);
+    this.recipeChanged.next(this.recipes.slice());
+  }
+
+  updateRecipe(index: number, newRecipe: Recipe) {
+    this.recipes[index] = newRecipe;
+    this.recipeChanged.next(this.recipes.slice());
+  }
 }

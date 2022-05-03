@@ -1,5 +1,6 @@
 import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 import {AppComponent} from './app.component';
 import {HeaderComponent} from './component/header/header.component';
@@ -12,8 +13,8 @@ import {ShoppingListComponent} from './component/shopping-list/shopping-list.com
 import {AuthComponent} from './component/auth/auth.component';
 import {ShoppingListService} from "./service/shopping-list.service";
 import {IngredientEditComponent} from './component/shopping-list/ingredient-edit/ingredient-edit.component';
-import { RecipeDetailsComponent } from './component/recipes/recipe-details/recipe-details.component';
-import {FormsModule} from "@angular/forms";
+import {RecipeDetailsComponent} from './component/recipes/recipe-details/recipe-details.component';
+import {RecipeEditComponent} from './component/recipes/recipe-edit/recipe-edit.component';
 
 @NgModule({
   declarations: [
@@ -25,12 +26,14 @@ import {FormsModule} from "@angular/forms";
     ShoppingListComponent,
     AuthComponent,
     IngredientEditComponent,
-    RecipeDetailsComponent
+    RecipeDetailsComponent,
+    RecipeEditComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [
     RecipeService,
