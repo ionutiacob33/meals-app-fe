@@ -7,7 +7,7 @@ import {Subject} from "rxjs";
 export class RecipeService {
   private recipes: Recipe[] = [
     new Recipe(
-      1,
+      0,
       "Burger",
       "Delicious Burger",
       "https://thumbs.dreamstime.com/z/burger-3823314.jpg",
@@ -19,7 +19,7 @@ export class RecipeService {
       ]
     ),
     new Recipe(
-      2,
+      1,
       "Pasta",
       "Delicious Pasta",
       "https://media.istockphoto.com/photos/ro/spaghete-%C3%AEntr-un-vas-pe-un-fundal-alb-id1144823591?s=612x612",
@@ -32,7 +32,7 @@ export class RecipeService {
 
     ),
     new Recipe(
-      3,
+      2,
       "Salad",
       "Delicious Salad",
       "https://st.depositphotos.com/1004373/1268/i/950/depositphotos_12682057-stock-photo-fresh-salad.jpg",
@@ -63,6 +63,11 @@ export class RecipeService {
 
   updateRecipe(index: number, newRecipe: Recipe) {
     this.recipes[index] = newRecipe;
+    this.recipeChanged.next(this.recipes.slice());
+  }
+
+  deleteRecipe(index: number) {
+    this.recipes.splice(index, 1);
     this.recipeChanged.next(this.recipes.slice());
   }
 }
