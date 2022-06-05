@@ -57,10 +57,14 @@ export class AuthComponent implements OnInit {
         resData => {
           console.log(resData);
           this.isLoading = false;
-          this.router.navigate(['/recipes'])
+          if (resData.statusCode !== 200) {
+            this.error = resData.message;
+          } else {
+            this.router.navigate(['/recipes'])
+          }
         },
-        errorMessage => {
-          this.error = errorMessage;
+        error => {
+          this.error = error.getMessage();
           this.isLoading = false;
         });
     }
