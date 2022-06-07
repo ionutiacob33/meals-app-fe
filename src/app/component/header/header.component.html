@@ -4,18 +4,27 @@
     <div class="collapse navbar-collapse">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item" routerLinkActive="active">
-          <a class="nav-link" routerLink="auth">Authenticate</a>
+          <a class="nav-link" routerLink="auth" *ngIf="!isAuth">Authenticate</a>
         </li>
         <li class="nav-item" routerLinkActive="active">
-          <a class="nav-link" routerLink="recipes">Recipes</a>
+          <a class="nav-link" routerLink="recipes" *ngIf="isAuth">Recipes</a>
         </li>
         <li class="nav-item" routerLinkActive="active">
-          <a class="nav-link" routerLink="shopping-list">Shopping List</a>
+          <a class="nav-link" routerLink="shopping-list" *ngIf="isAuth">Shopping List</a>
         </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li>
-          <a class="nav-link" href="#">Logout</a>
+        <li *ngIf="isAuth" class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Dropdown
+          </a>
+          <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+            <li><a class="dropdown-item" href="#">Save Data</a></li>
+            <li><a class="dropdown-item" href="#">Fetch Data</a></li>
+          </ul>
+        </li>
+        <li *ngIf="isAuth">
+          <a class="nav-link" (click)="onLogout()">Logout</a>
         </li>
       </ul>
     </div>

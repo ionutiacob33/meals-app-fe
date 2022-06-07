@@ -13,6 +13,7 @@ import {LoginResponse, SignUpResponse} from "../../model/auth.model";
 export class AuthComponent implements OnInit {
   isLoginMode = true;
   isLoading = false;
+  signUpSuccess = false;
   error: string = '';
 
   constructor(private authService: AuthService,
@@ -60,7 +61,9 @@ export class AuthComponent implements OnInit {
           if (resData.statusCode !== 200) {
             this.error = resData.message;
           } else {
-            this.router.navigate(['/recipes'])
+            this.signUpSuccess = true;
+            this.router.navigate(['/recipes']);
+            alert("Sign up successful, please activate your account before logging in");
           }
         },
         error => {
