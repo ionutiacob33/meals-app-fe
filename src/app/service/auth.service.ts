@@ -1,13 +1,14 @@
 import {Injectable} from "@angular/core";
 import {HttpClient, HttpErrorResponse} from "@angular/common/http";
 import {LoginResponse, SignUpResponse} from "../model/auth.model";
-import {catchError, Subject, tap, throwError} from "rxjs";
+import {BehaviorSubject, catchError, tap, throwError} from "rxjs";
 import {User} from "../model/user.model";
 import {Router} from "@angular/router";
 
 @Injectable()
 export class AuthService {
-  user = new Subject<User>();
+  // @ts-ignore
+  user = new BehaviorSubject<User>(null);
   private accessToken?: string;
   private refreshToken?: string;
 

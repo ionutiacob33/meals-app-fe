@@ -1,6 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import { AuthService } from 'src/app/service/auth.service';
 import {Subscription} from "rxjs";
+import {DataStorageService} from "../../service/data-storage.service";
 
 @Component({
   selector: 'app-header',
@@ -11,7 +12,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
   private userSub!: Subscription;
   isAuth = false;
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService,
+              private dataStorageService: DataStorageService) { }
 
   ngOnInit(): void {
     this.userSub = this.authService.user.subscribe(
@@ -26,7 +28,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   onFetchData() {
-    // this.dataStorageService.fetchRecipes().subscribe();
+    this.dataStorageService.fetchRecipes().subscribe();
   }
 
   onLogout() {

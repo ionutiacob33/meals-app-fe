@@ -24,8 +24,8 @@
     <ul class="list-group">
       <li
         class="list-group-item"
-        *ngFor="let ingredient of recipe.ingredients">
-        {{ ingredient.name }} ( {{ ingredient.quantity }} {{ingredient.unit}} )
+        *ngFor="let ingredient of recipe.recipeIngredients">
+        {{ ingredient.ingredient }} ( {{ ingredient.quantity }} {{ingredient.unit}} )
       </li>
     </ul>
   </div>
