@@ -1,5 +1,5 @@
 import {Injectable} from "@angular/core";
-import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {HttpClient} from "@angular/common/http";
 import {RecipeService} from "./recipe.service";
 import {GetAllRecipesResponse} from "../model/data.model";
 import {exhaustMap, take, tap} from "rxjs";
@@ -26,7 +26,8 @@ export class DataStorageService {
           if (resData.status === 'OK' && resData.statusCode === 200) {
             this.recipeService.setRecipes(resData.data.recipes)
           } else {
-            alert('Error retrieving recipes ' + resData.message);
+            alert('Error retrieving recipes ' + resData.message + ' please try again');
+            this.authService.refreshAuthToken();
           }
         }
       )

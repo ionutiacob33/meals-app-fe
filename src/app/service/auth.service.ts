@@ -1,5 +1,5 @@
 import {Injectable} from "@angular/core";
-import {HttpClient, HttpErrorResponse} from "@angular/common/http";
+import {HttpClient, HttpErrorResponse, HttpHeaders} from "@angular/common/http";
 import {LoginResponse, SignUpResponse} from "../model/auth.model";
 import {BehaviorSubject, catchError, tap, throwError} from "rxjs";
 import {User} from "../model/user.model";
@@ -50,6 +50,39 @@ export class AuthService {
     );
   }
 
+  refreshAuthToken() {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${this.user.value.refreshToken}`
+    });
+    return this.http
+      .get<LoginResponse>('http://localhost:8080/api/auth/token/refresh', {headers: headers})
+      .pipe(
+        catchError(this.handleError),
+        tap(resData => {
+          this.accessToken = resData.access_token;
+          this.refreshToken = resData.refresh_token;
+          const user = new User(this.user.value.username, this.accessToken, this.refreshToken);
+          this.user.next(user);
+          localStorage.setItem('userData', JSON.stringify(user));
+        })
+      )
+  }
+
+  autoLogin() {
+    const userData: {
+      username: string,
+      token: string,
+      refreshToken: string
+    } = JSON.parse(localStorage.getItem('userData')!);
+    if (!userData) {
+      return;
+    }
+
+    const loadedUser = new User(userData.username, userData.token, userData.refreshToken);
+    this.user.next(loadedUser);
+  }
+
   logout() {
     // @ts-ignore
     this.user.next(null);
@@ -61,11 +94,13 @@ export class AuthService {
   private handleError(errorRes: HttpErrorResponse) {
     let errorMessage = 'An unknown error occurred!';
     console.log(errorRes)
-    switch (errorRes.status) {
-      case 403:
-        errorMessage = 'Account not activated';
-        break;
+    if (errorRes.status === 403 && errorRes.message) {
+      alert('Token expired, please login again');
+      this.logout();
+    } else if (errorRes.status === 403) {
+      errorMessage = 'Account not activated';
     }
+
     return throwError(errorMessage);
   }
 

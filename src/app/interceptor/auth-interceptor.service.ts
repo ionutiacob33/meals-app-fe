@@ -15,6 +15,8 @@ export class AuthInterceptorService implements HttpInterceptor {
       exhaustMap(user => {
         if (!user) {
           return next.handle(req);
+        } else if (req.url === 'http://localhost:8080/api/auth/token/refresh') {
+          return next.handle(req);
         } else {
           const headers = new HttpHeaders({
             'Content-Type': 'application/json',

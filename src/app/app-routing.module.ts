@@ -5,18 +5,20 @@ import {ShoppingListComponent} from "./component/shopping-list/shopping-list.com
 import {AuthComponent} from "./component/auth/auth.component";
 import {RecipeDetailsComponent} from "./component/recipes/recipe-details/recipe-details.component";
 import {RecipeEditComponent} from "./component/recipes/recipe-edit/recipe-edit.component";
+import {AuthGuard} from "./guard/auth-guard";
 
 const appRoutes: Routes = [
   {
     path: 'recipes',
     component: RecipesComponent,
+    canActivate: [AuthGuard],
     children: [
       {path: 'new', component: RecipeEditComponent},
       {path: ':id', component: RecipeDetailsComponent},
       {path: ':id/edit', component: RecipeEditComponent}
     ]
   },
-  {path: 'shopping-list', component: ShoppingListComponent},
+  {path: 'shopping-list', component: ShoppingListComponent, canActivate: [AuthGuard]},
   {path: 'auth', component: AuthComponent},
   {path: '', redirectTo: '/recipes', pathMatch: 'full'},
   {path: '**', redirectTo: '/recipes', pathMatch: 'full'}
