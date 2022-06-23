@@ -24,10 +24,10 @@ export class RecipeService {
       "Delicious Pasta",
       "https://media.istockphoto.com/photos/ro/spaghete-%C3%AEntr-un-vas-pe-un-fundal-alb-id1144823591?s=612x612",
       [
-        new Ingredient(1, 'Pasta', 'grams', 100),
-        new Ingredient(2, 'Meat', 'grams', 100),
-        new Ingredient(3, 'Tomatoes', 'pieces', 5),
-        new Ingredient(4, 'Parmesan', 'grams', 50),
+        new Ingredient(5, 'Pasta', 'grams', 100),
+        new Ingredient(6, 'Meat', 'grams', 100),
+        new Ingredient(7, 'Tomatoes', 'pieces', 5),
+        new Ingredient(8, 'Parmesan', 'grams', 50),
       ]
 
     ),
@@ -37,10 +37,10 @@ export class RecipeService {
       "Delicious Salad",
       "https://st.depositphotos.com/1004373/1268/i/950/depositphotos_12682057-stock-photo-fresh-salad.jpg",
       [
-        new Ingredient(1, 'Salad', 'grams', 200),
-        new Ingredient(2, 'Tomatoes', 'grams', 100),
-        new Ingredient(3, 'Vinegar', 'grams', 10),
-        new Ingredient(4, 'Olive Oil', 'grams', 30),
+        new Ingredient(9, 'Salad', 'grams', 200),
+        new Ingredient(10, 'Tomatoes', 'grams', 100),
+        new Ingredient(11, 'Vinegar', 'grams', 10),
+        new Ingredient(12, 'Olive Oil', 'grams', 30),
       ]
     )
   ];

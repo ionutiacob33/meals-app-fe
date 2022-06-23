@@ -13,6 +13,16 @@ export class DataStorageService {
               private authService: AuthService) {
   }
 
+  storeRecipes() {
+    const recipes = this.recipeService.getRecipes();
+    console.log(recipes);
+    this.http
+      .put('http://localhost:8080/api/recipe/multiple', recipes)
+      .subscribe(response => {
+        console.log(response);
+      })
+  }
+
   fetchRecipes() {
     return this.authService.user.pipe(
       take(1),

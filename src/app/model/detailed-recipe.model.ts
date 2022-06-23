@@ -7,10 +7,10 @@ export class DetailedRecipe {
     public description: string,
     public imageUrl: string,
     public recipeIngredients: Ingredient[],
-    public calories?: number,
-    public protein?: number,
-    public fat?: number,
-    public carbs?: number,
-    public apiId?: number,
+    // public calories?: number,
+    // public protein?: number,
+    // public fat?: number,
+    // public carbs?: number,
+    // public apiId?: number,
   ) { }
 }

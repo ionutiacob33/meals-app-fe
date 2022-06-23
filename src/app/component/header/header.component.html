@@ -16,10 +16,10 @@
       <ul class="nav navbar-nav navbar-right">
         <li *ngIf="isAuth" class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Dropdown
+            Manage Data
           </a>
           <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-            <li><a class="dropdown-item" href="#">Save Data</a></li>
+            <li><a class="dropdown-item" (click)="onSaveData()">Save Data</a></li>
             <li><a class="dropdown-item" (click)="onFetchData()">Fetch Data</a></li>
           </ul>
         </li>
