@@ -1,4 +1,4 @@
-import {Ingredient} from "./ingredient.model";
+import { Ingredient } from './ingredient.model';
 
 export class DetailedRecipe {
   constructor(
@@ -6,11 +6,10 @@ export class DetailedRecipe {
     public title: string,
     public description: string,
     public imageUrl: string,
-    public recipeIngredients: Ingredient[],
-    // public calories?: number,
-    // public protein?: number,
-    // public fat?: number,
-    // public carbs?: number,
-    // public apiId?: number,
-  ) { }
+    public recipeIngredients: Ingredient[] // public calories?: number,
+  ) // public protein?: number,
+  // public fat?: number,
+  // public carbs?: number,
+  // public apiId?: number,
+  {}
 }

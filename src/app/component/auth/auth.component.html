@@ -3,14 +3,17 @@
     <div class="alert alert-danger" *ngIf="error !== ''">
       <p>{{ error }}</p>
     </div>
-    <div class="alert alert-secondary" *ngIf="!isLoading && !isLoginMode && signUpSuccess">
+    <div
+      class="alert alert-secondary"
+      *ngIf="!isLoading && !isLoginMode && signUpSuccess"
+    >
       <p>Please activate your account before Logging in</p>
     </div>
-    <div *ngIf="isLoading" style="text-align: center;">
+    <div *ngIf="isLoading" style="text-align: center">
       <app-loading-spinner></app-loading-spinner>
     </div>
     <form #authForm="ngForm" (ngSubmit)="onSubmit(authForm)" *ngIf="!isLoading">
-      <div class="form-group" *ngIf="!isLoginMode"git >
+      <div class="form-group" *ngIf="!isLoginMode" git>
         <label for="email">E-mail</label>
         <input
           type="email"
@@ -20,7 +23,7 @@
           name="email"
           required
           email
-        >
+        />
       </div>
       <div class="form-group">
         <label for="username">Username</label>
@@ -31,7 +34,7 @@
           ngModel
           name="username"
           required
-        >
+        />
       </div>
       <div class="form-group">
         <label for="password">Password</label>
@@ -43,18 +46,20 @@
           name="password"
           required
           minlength="6"
-        >
+        />
       </div>
-      <br>
+      <br />
       <div>
         <button
           class="btn btn-primary"
           type="submit"
           [disabled]="!authForm.valid"
-        >{{ isLoginMode ? 'Login' : 'Sign Up' }}</button>
+        >
+          {{ isLoginMode ? "Login" : "Sign Up" }}
+        </button>
         |
         <button class="btn btn-primary" type="button" (click)="onSwitchMode()">
-          Switch to {{ isLoginMode ? 'Sign Up' : 'Login' }}
+          Switch to {{ isLoginMode ? "Sign Up" : "Login" }}
         </button>
       </div>
     </form>

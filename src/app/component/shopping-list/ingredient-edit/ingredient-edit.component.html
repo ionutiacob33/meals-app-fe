@@ -10,7 +10,7 @@
           name="name"
           ngModel
           required
-        >
+        />
       </div>
       <div class="col-md-7 form-group">
         <label for="quantity">Quantity</label>
@@ -22,7 +22,7 @@
           pattern="^[1-9]+[0-9]*$"
           ngModel
           required
-        >
+        />
       </div>
       <div class="col-md-7 form-group">
         <label for="name">Unit</label>
@@ -33,30 +33,30 @@
           name="unit"
           ngModel
           required
-        >
+        />
       </div>
-      <br>
+      <br />
       <div class="row">
         <div class="col-sm-12">
-          <button
-            class="btn btn-success"
-            type="submit"
-            [disabled]="!f.valid"
-          >{{ editMode ? 'Update' : 'Add' }}</button>
+          <button class="btn btn-success" type="submit" [disabled]="!f.valid">
+            {{ editMode ? "Update" : "Add" }}
+          </button>
           &nbsp;
           <button
             class="btn btn-danger"
             type="button"
             (click)="onDelete()"
-            *ngIf="editMode">Delete</button>
+            *ngIf="editMode"
+          >
+            Delete
+          </button>
           &nbsp;
-          <button
-            class="btn btn-primary"
-            type="button"
-            (click)="onClear()">Clear</button>
+          <button class="btn btn-primary" type="button" (click)="onClear()">
+            Clear
+          </button>
         </div>
       </div>
-      <br>
+      <br />
     </form>
   </div>
 </div>

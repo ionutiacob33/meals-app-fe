@@ -1,25 +1,25 @@
 export interface SignUpResponse {
-  timeStamp: string,
-  statusCode: number,
-  status: string,
-  message: string,
-  data: DataObject
+  timeStamp: string;
+  statusCode: number;
+  status: string;
+  message: string;
+  data: DataObject;
 }
 
 export interface LoginResponse {
-  access_token: string,
-  refresh_token: string
+  access_token: string;
+  refresh_token: string;
 }
 
 interface DataObject {
-  user: UserDetails
+  user: UserDetails;
 }
 
 interface UserDetails {
-  id: number,
-  username: string,
-  password: string,
-  email: string,
-  created: string,
-  enabled: boolean
+  id: number;
+  username: string;
+  password: string;
+  email: string;
+  created: string;
+  enabled: boolean;
 }

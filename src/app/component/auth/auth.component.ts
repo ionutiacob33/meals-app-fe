@@ -1,14 +1,14 @@
-import {Component, OnInit} from '@angular/core';
-import {AuthService} from "../../service/auth.service";
-import {Router} from "@angular/router";
-import {NgForm} from "@angular/forms";
-import {Observable} from "rxjs";
-import {LoginResponse, SignUpResponse} from "../../model/auth.model";
+import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../../service/auth.service';
+import { Router } from '@angular/router';
+import { NgForm } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { LoginResponse, SignUpResponse } from '../../model/auth.model';
 
 @Component({
   selector: 'app-auth',
   templateUrl: './auth.component.html',
-  styleUrls: ['./auth.component.css']
+  styleUrls: ['./auth.component.css'],
 })
 export class AuthComponent implements OnInit {
   isLoginMode = true;
@@ -16,12 +16,9 @@ export class AuthComponent implements OnInit {
   signUpSuccess = false;
   error: string = '';
 
-  constructor(private authService: AuthService,
-              private router: Router) {
-  }
+  constructor(private authService: AuthService, private router: Router) {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   onSwitchMode() {
     this.isLoginMode = !this.isLoginMode;
@@ -43,19 +40,20 @@ export class AuthComponent implements OnInit {
     if (this.isLoginMode) {
       loginObs = this.authService.login(username, password);
       loginObs.subscribe(
-        resData => {
+        (resData) => {
           console.log(resData);
           this.isLoading = false;
-          this.router.navigate(['/recipes'])
+          this.router.navigate(['/recipes']);
         },
-        errorMessage => {
+        (errorMessage) => {
           this.error = errorMessage;
           this.isLoading = false;
-        });
+        }
+      );
     } else {
       signUpObs = this.authService.signup(email, username, password);
       signUpObs.subscribe(
-        resData => {
+        (resData) => {
           console.log(resData);
           this.isLoading = false;
           if (resData.statusCode !== 200) {
@@ -63,13 +61,16 @@ export class AuthComponent implements OnInit {
           } else {
             this.signUpSuccess = true;
             this.router.navigate(['/recipes']);
-            alert("Sign up successful, please activate your account before logging in");
+            alert(
+              'Sign up successful, please activate your account before logging in'
+            );
           }
         },
-        error => {
+        (error) => {
           this.error = error.getMessage();
           this.isLoading = false;
-        });
+        }
+      );
     }
 
     form.reset();

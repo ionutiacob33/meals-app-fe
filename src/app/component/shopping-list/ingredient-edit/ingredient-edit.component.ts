@@ -1,13 +1,13 @@
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {Form, NgForm} from "@angular/forms";
-import {Subscription} from "rxjs";
-import {Ingredient} from "../../../model/ingredient.model";
-import {ShoppingListService} from "../../../service/shopping-list.service";
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Form, NgForm } from '@angular/forms';
+import { Subscription } from 'rxjs';
+import { Ingredient } from '../../../model/ingredient.model';
+import { ShoppingListService } from '../../../service/shopping-list.service';
 
 @Component({
   selector: 'app-ingredient-edit',
   templateUrl: './ingredient-edit.component.html',
-  styleUrls: ['./ingredient-edit.component.css']
+  styleUrls: ['./ingredient-edit.component.css'],
 })
 export class IngredientEditComponent implements OnInit, OnDestroy {
   @ViewChild('f') ingredientEditForm!: NgForm;
@@ -16,7 +16,7 @@ export class IngredientEditComponent implements OnInit, OnDestroy {
   editedItem!: Ingredient;
   editMode = false;
 
-  constructor(private shoppingListService: ShoppingListService) { }
+  constructor(private shoppingListService: ShoppingListService) {}
 
   ngOnInit(): void {
     this.subscription = this.shoppingListService.startedEditing.subscribe(
@@ -27,17 +27,24 @@ export class IngredientEditComponent implements OnInit, OnDestroy {
         this.ingredientEditForm.setValue({
           name: this.editedItem.ingredient,
           quantity: this.editedItem.quantity,
-          unit: this.editedItem.unit
-        })
+          unit: this.editedItem.unit,
+        });
       }
     );
   }
 
   onSubmitItem(form: NgForm) {
     const value = form.value;
-    const newIngredient = new Ingredient(value.name, value.unit, value.quantity);
+    const newIngredient = new Ingredient(
+      value.name,
+      value.unit,
+      value.quantity
+    );
     if (this.editMode) {
-      this.shoppingListService.updateIngredient(this.editedItemIndex, newIngredient);
+      this.shoppingListService.updateIngredient(
+        this.editedItemIndex,
+        newIngredient
+      );
     } else {
       this.shoppingListService.addIngredient(newIngredient);
     }

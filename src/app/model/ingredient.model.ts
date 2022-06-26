@@ -3,6 +3,6 @@ export class Ingredient {
     // public id: number,
     public ingredient: string,
     public unit: string,
-    public quantity: number,
-  ) { }
+    public quantity: number
+  ) {}
 }
