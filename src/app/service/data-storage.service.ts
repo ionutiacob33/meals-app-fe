@@ -28,7 +28,7 @@ export class DataStorageService {
       take(1),
       exhaustMap((user) => {
         return this.http.get<GetAllRecipesResponse>(
-          'http://localhost:8080/api/recipe'
+          'http://localhost:8080/api/recipe/user'
         );
       }),
       tap((resData) => {
