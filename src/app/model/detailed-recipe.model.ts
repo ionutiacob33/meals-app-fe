@@ -2,7 +2,7 @@ import {Ingredient} from "./ingredient.model";
 
 export class DetailedRecipe {
   constructor(
-    public id: number,
+    // public id: number,
     public title: string,
     public description: string,
     public imageUrl: string,

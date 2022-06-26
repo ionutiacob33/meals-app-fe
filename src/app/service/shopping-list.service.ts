@@ -5,10 +5,10 @@ import {Subject} from "rxjs";
 @Injectable()
 export class ShoppingListService {
   private ingredients: Ingredient[] = [
-    new Ingredient(1, 'Apple', 'pieces', 5),
-    new Ingredient(2, 'Tomatoes', 'pieces', 10),
-    new Ingredient(3, 'Flour', 'grams', 500),
-    new Ingredient(4, 'Sugar', 'grams', 100),
+    new Ingredient('Apple', 'pieces', 5),
+    new Ingredient('Tomatoes', 'pieces', 10),
+    new Ingredient('Flour', 'grams', 500),
+    new Ingredient('Sugar', 'grams', 100),
   ]
 
   ingredientsChanged = new Subject<Ingredient[]>();
@@ -23,7 +23,6 @@ export class ShoppingListService {
   }
 
   addIngredient(newIngredient: Ingredient) {
-    newIngredient.id = this.ingredients.length;
     this.ingredients.push(newIngredient);
     this.ingredientsChanged.next(this.ingredients.slice());
   }
@@ -33,8 +32,8 @@ export class ShoppingListService {
     this.ingredientsChanged.next(this.ingredients.slice());
   }
 
-  updateIngredient(newIngredient: Ingredient) {
-    this.ingredients[newIngredient.id] = newIngredient;
+  updateIngredient(index: number, newIngredient: Ingredient) {
+    this.ingredients[index] = newIngredient;
     this.ingredientsChanged.next(this.ingredients.slice());
   }
 

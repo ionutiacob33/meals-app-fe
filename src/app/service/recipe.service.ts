@@ -7,40 +7,37 @@ import {Subject} from "rxjs";
 export class RecipeService {
   private recipes: DetailedRecipe[] = [
     new DetailedRecipe(
-      1,
       "Burger",
       "Delicious Burger",
       "https://thumbs.dreamstime.com/z/burger-3823314.jpg",
       [
-        new Ingredient(1, 'Buns', 'pieces', 2),
-        new Ingredient(2, 'Meat', 'grams', 180),
-        new Ingredient(3, 'Ketchup', 'grams', 10),
-        new Ingredient(4, 'Mayo', 'grams', 10),
+        new Ingredient('Buns', 'pieces', 2),
+        new Ingredient('Meat', 'grams', 180),
+        new Ingredient('Ketchup', 'grams', 10),
+        new Ingredient('Mayo', 'grams', 10),
       ]
     ),
     new DetailedRecipe(
-      2,
       "Pasta",
       "Delicious Pasta",
       "https://media.istockphoto.com/photos/ro/spaghete-%C3%AEntr-un-vas-pe-un-fundal-alb-id1144823591?s=612x612",
       [
-        new Ingredient(5, 'Pasta', 'grams', 100),
-        new Ingredient(6, 'Meat', 'grams', 100),
-        new Ingredient(7, 'Tomatoes', 'pieces', 5),
-        new Ingredient(8, 'Parmesan', 'grams', 50),
+        new Ingredient('Pasta', 'grams', 100),
+        new Ingredient('Meat', 'grams', 100),
+        new Ingredient('Tomatoes', 'pieces', 5),
+        new Ingredient('Parmesan', 'grams', 50),
       ]
 
     ),
     new DetailedRecipe(
-      3,
       "Salad",
       "Delicious Salad",
       "https://st.depositphotos.com/1004373/1268/i/950/depositphotos_12682057-stock-photo-fresh-salad.jpg",
       [
-        new Ingredient(9, 'Salad', 'grams', 200),
-        new Ingredient(10, 'Tomatoes', 'grams', 100),
-        new Ingredient(11, 'Vinegar', 'grams', 10),
-        new Ingredient(12, 'Olive Oil', 'grams', 30),
+        new Ingredient('Salad', 'grams', 200),
+        new Ingredient('Tomatoes', 'grams', 100),
+        new Ingredient('Vinegar', 'grams', 10),
+        new Ingredient('Olive Oil', 'grams', 30),
       ]
     )
   ];
@@ -61,7 +58,6 @@ export class RecipeService {
   }
 
   addRecipe(recipe: DetailedRecipe) {
-    recipe.id = this.recipes.length;
     this.recipes.push(recipe);
     this.recipesChanged.next(this.recipes.slice());
   }
