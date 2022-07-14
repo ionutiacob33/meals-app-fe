@@ -12,3 +12,15 @@ export interface GetAllRecipesResponse {
 interface DataObject {
   recipes: DetailedRecipe[];
 }
+
+export interface SaveRecipeResponse {
+  timeStamp: string;
+  statusCode: number;
+  status: string;
+  message: string;
+  data: SaveRecipeDataObject;
+}
+
+interface SaveRecipeDataObject {
+  recipe: DetailedRecipe;
+}

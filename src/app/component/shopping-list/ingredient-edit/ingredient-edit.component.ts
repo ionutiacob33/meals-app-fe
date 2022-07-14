@@ -36,6 +36,7 @@ export class IngredientEditComponent implements OnInit, OnDestroy {
   onSubmitItem(form: NgForm) {
     const value = form.value;
     const newIngredient = new Ingredient(
+      1,
       value.name,
       value.unit,
       value.quantity

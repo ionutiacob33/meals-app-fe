@@ -5,10 +5,10 @@ import { Subject } from 'rxjs';
 @Injectable()
 export class ShoppingListService {
   private ingredients: Ingredient[] = [
-    new Ingredient('Apple', 'pieces', 5),
-    new Ingredient('Tomatoes', 'pieces', 10),
-    new Ingredient('Flour', 'grams', 500),
-    new Ingredient('Sugar', 'grams', 100),
+    new Ingredient(1, 'Apple', 'pieces', 5),
+    new Ingredient(2, 'Tomatoes', 'pieces', 10),
+    new Ingredient(3, 'Flour', 'grams', 500),
+    new Ingredient(4, 'Sugar', 'grams', 100),
   ];
 
   ingredientsChanged = new Subject<Ingredient[]>();

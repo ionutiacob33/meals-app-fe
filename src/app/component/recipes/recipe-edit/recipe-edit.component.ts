@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import { DataStorageService } from 'src/app/service/data-storage.service';
 import { RecipeService } from '../../../service/recipe.service';
 
 @Component({
@@ -16,6 +17,7 @@ export class RecipeEditComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private recipeService: RecipeService,
+    private dataStorageService: DataStorageService,
     private router: Router
   ) {}
 
@@ -32,6 +34,8 @@ export class RecipeEditComponent implements OnInit {
       this.recipeService.updateRecipe(this.id, this.recipeForm.value);
     } else {
       this.recipeService.addRecipe(this.recipeForm.value);
+      console.log(this.recipeForm.value);
+      this.dataStorageService.saveRecipe(this.recipeForm.value);
     }
     this.onCancel();
   }
@@ -43,7 +47,7 @@ export class RecipeEditComponent implements OnInit {
   onAddIngredient() {
     (<FormArray>this.recipeForm.get('recipeIngredients')).push(
       new FormGroup({
-        name: new FormControl(null, [Validators.required]),
+        ingredient: new FormControl(null, [Validators.required]),
         quantity: new FormControl(null, [
           Validators.required,
           Validators.pattern(/^[1-9]+[0-9]*$/),
@@ -97,7 +101,7 @@ export class RecipeEditComponent implements OnInit {
         for (let ingredient of recipe.recipeIngredients) {
           recipeIngredients.push(
             new FormGroup({
-              name: new FormControl(ingredient.ingredient, [
+              ingredient: new FormControl(ingredient.ingredient, [
                 Validators.required,
               ]),
               quantity: new FormControl(ingredient.quantity, [
