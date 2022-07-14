@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { RecipeService } from './recipe.service';
 import {
+  GetAllPantryIngredientsResponse,
   GetAllRecipesResponse,
   SaveIngredientResponse,
   SaveRecipeResponse,
@@ -48,12 +49,12 @@ export class DataStorageService {
           'http://localhost:8080/api/recipe/user'
         );
       }),
-      tap((resData) => {
-        if (resData.status === 'OK' && resData.statusCode === 200) {
-          this.recipeService.setRecipes(resData.data.recipes);
+      tap((response) => {
+        if (response.status === 'OK' && response.statusCode === 200) {
+          this.recipeService.setRecipes(response.data.recipes);
         } else {
           alert(
-            'Error retrieving recipes ' + resData.message + ' please try again'
+            'Error retrieving recipes ' + response.message + ' please try again'
           );
           this.authService.refreshAuthToken();
         }
@@ -70,6 +71,28 @@ export class DataStorageService {
       .subscribe((response) => {
         ingredient = response.data.pantryIngredient;
         console.log(ingredient);
+      });
+  }
+
+  fetchIngredients() {
+    this.shoppingListService.clearIngredients();
+    this.http
+      .get<GetAllPantryIngredientsResponse>(
+        'http://localhost:8080/api/pantry/user'
+      )
+      .subscribe((response) => {
+        if (response.status === 'OK' && response.statusCode === 200) {
+          this.shoppingListService.addIngredients(
+            response.data.pantryIngredients
+          );
+        } else {
+          alert(
+            'Error retrieving pantry ingredients ' +
+              response.message +
+              ' please try again'
+          );
+          this.authService.refreshAuthToken();
+        }
       });
   }
 }

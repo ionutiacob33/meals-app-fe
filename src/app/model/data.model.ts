@@ -6,10 +6,10 @@ export interface GetAllRecipesResponse {
   statusCode: number;
   status: string;
   message: string;
-  data: DataObject;
+  data: GetRecipesDataObject;
 }
 
-interface DataObject {
+interface GetRecipesDataObject {
   recipes: DetailedRecipe[];
 }
 
@@ -35,4 +35,16 @@ export interface SaveIngredientResponse {
 
 interface SaveIngredientDataObject {
   pantryIngredient: Ingredient;
+}
+
+export interface GetAllPantryIngredientsResponse {
+  timeStamp: string;
+  statusCode: number;
+  status: string;
+  message: string;
+  data: GetPantryDataObject;
+}
+
+interface GetPantryDataObject {
+  pantryIngredients: Ingredient[];
 }
