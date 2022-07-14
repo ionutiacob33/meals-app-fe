@@ -24,3 +24,15 @@ export interface SaveRecipeResponse {
 interface SaveRecipeDataObject {
   recipe: DetailedRecipe;
 }
+
+export interface SaveIngredientResponse {
+  timeStamp: string;
+  statusCode: number;
+  status: string;
+  message: string;
+  data: SaveIngredientDataObject;
+}
+
+interface SaveIngredientDataObject {
+  pantryIngredient: Ingredient;
+}

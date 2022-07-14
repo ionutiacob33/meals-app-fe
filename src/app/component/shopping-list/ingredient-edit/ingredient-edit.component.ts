@@ -1,6 +1,13 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { Form, NgForm } from '@angular/forms';
+import {
+  Form,
+  FormControl,
+  FormGroup,
+  NgForm,
+  Validators,
+} from '@angular/forms';
 import { Subscription } from 'rxjs';
+import { DataStorageService } from 'src/app/service/data-storage.service';
 import { Ingredient } from '../../../model/ingredient.model';
 import { ShoppingListService } from '../../../service/shopping-list.service';
 
@@ -10,13 +17,16 @@ import { ShoppingListService } from '../../../service/shopping-list.service';
   styleUrls: ['./ingredient-edit.component.css'],
 })
 export class IngredientEditComponent implements OnInit, OnDestroy {
-  @ViewChild('f') ingredientEditForm!: NgForm;
   subscription!: Subscription;
   editedItemIndex!: number;
   editedItem!: Ingredient;
+  ingredientForm!: FormGroup;
   editMode = false;
 
-  constructor(private shoppingListService: ShoppingListService) {}
+  constructor(
+    private shoppingListService: ShoppingListService,
+    private dataStorageService: DataStorageService
+  ) {}
 
   ngOnInit(): void {
     this.subscription = this.shoppingListService.startedEditing.subscribe(
@@ -24,37 +34,33 @@ export class IngredientEditComponent implements OnInit, OnDestroy {
         this.editedItemIndex = index;
         this.editedItem = this.shoppingListService.getIngredient(index);
         this.editMode = true;
-        this.ingredientEditForm.setValue({
-          name: this.editedItem.ingredient,
+        this.ingredientForm.setValue({
+          ingredient: this.editedItem.ingredient,
           quantity: this.editedItem.quantity,
           unit: this.editedItem.unit,
         });
       }
     );
+    this.initForm();
   }
 
-  onSubmitItem(form: NgForm) {
-    const value = form.value;
-    const newIngredient = new Ingredient(
-      1,
-      value.name,
-      value.unit,
-      value.quantity
-    );
+  onSubmit() {
     if (this.editMode) {
       this.shoppingListService.updateIngredient(
         this.editedItemIndex,
-        newIngredient
+        this.ingredientForm.value
       );
     } else {
-      this.shoppingListService.addIngredient(newIngredient);
+      this.shoppingListService.addIngredient(this.ingredientForm.value);
+      console.log(this.ingredientForm.value);
+      this.dataStorageService.saveIngredient(this.ingredientForm.value);
     }
     this.editMode = false;
-    form.reset();
+    this.ingredientForm.reset();
   }
 
   onClear() {
-    this.ingredientEditForm.reset();
+    this.ingredientForm.reset();
     this.editMode = false;
   }
 
@@ -65,5 +71,29 @@ export class IngredientEditComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
+  }
+
+  initForm() {
+    let ingredient = '';
+    let unit = '';
+    let quantity; // = 0;
+
+    if (this.editMode) {
+      const pantryIngredient = this.shoppingListService.getIngredient(
+        this.editedItemIndex
+      );
+      ingredient = pantryIngredient.ingredient;
+      unit = pantryIngredient.unit;
+      quantity = pantryIngredient.quantity;
+    }
+
+    this.ingredientForm = new FormGroup({
+      ingredient: new FormControl(ingredient, [Validators.required]),
+      unit: new FormControl(unit),
+      quantity: new FormControl(quantity, [
+        Validators.required,
+        Validators.pattern(/^[1-9]+[0-9]*$/),
+      ]),
+    });
   }
 }
