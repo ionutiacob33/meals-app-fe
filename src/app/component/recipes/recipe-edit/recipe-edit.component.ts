@@ -97,14 +97,14 @@ export class RecipeEditComponent implements OnInit {
       recipeTitle = recipe.title;
       recipeImageUrl = recipe.imageUrl;
       recipeDescription = recipe.description;
-      if (recipe['recipeIngredients']) {
-        for (let ingredient of recipe.recipeIngredients) {
+      if (recipe['ingredients']) {
+        for (let ingredient of recipe.ingredients) {
           recipeIngredients.push(
             new FormGroup({
-              ingredient: new FormControl(ingredient.ingredient, [
+              ingredient: new FormControl(ingredient.name, [
                 Validators.required,
               ]),
-              quantity: new FormControl(ingredient.quantity, [
+              quantity: new FormControl(ingredient.amount, [
                 Validators.required,
                 Validators.pattern(/^[1-9]+[0-9]*$/),
               ]),
@@ -113,8 +113,8 @@ export class RecipeEditComponent implements OnInit {
           );
         }
       }
-      if (recipe['recipeSteps']) {
-        for (let step of recipe.recipeSteps) {
+      if (recipe['steps']) {
+        for (let step of recipe.steps) {
           recipeSteps.push(
             new FormGroup({
               count: new FormControl(step.count, [

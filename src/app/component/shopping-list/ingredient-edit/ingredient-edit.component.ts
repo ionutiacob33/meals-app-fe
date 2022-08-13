@@ -35,8 +35,8 @@ export class IngredientEditComponent implements OnInit, OnDestroy {
         this.editedItem = this.shoppingListService.getIngredient(index);
         this.editMode = true;
         this.ingredientForm.setValue({
-          ingredient: this.editedItem.ingredient,
-          quantity: this.editedItem.quantity,
+          ingredient: this.editedItem.name,
+          quantity: this.editedItem.amount,
           unit: this.editedItem.unit,
         });
       }
@@ -82,9 +82,9 @@ export class IngredientEditComponent implements OnInit, OnDestroy {
       const pantryIngredient = this.shoppingListService.getIngredient(
         this.editedItemIndex
       );
-      ingredient = pantryIngredient.ingredient;
+      ingredient = pantryIngredient.name;
       unit = pantryIngredient.unit;
-      quantity = pantryIngredient.quantity;
+      quantity = pantryIngredient.amount;
     }
 
     this.ingredientForm = new FormGroup({
