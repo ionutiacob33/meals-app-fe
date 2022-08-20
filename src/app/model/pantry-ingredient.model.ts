@@ -3,6 +3,6 @@ export class PantryIngredient {
     public id: number,
     public ingredient: string,
     public unit: string,
-    public quantity: number
+    public amount: number
   ) {}
 }
