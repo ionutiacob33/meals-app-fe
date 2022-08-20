@@ -1,29 +1,4 @@
-import { Ingredient } from './ingredient.model';
-import { DetailedRecipe } from './detailed-recipe.model';
-
-export interface GetAllRecipesResponse {
-  timeStamp: string;
-  statusCode: number;
-  status: string;
-  message: string;
-  data: GetRecipesDataObject;
-}
-
-interface GetRecipesDataObject {
-  recipes: DetailedRecipe[];
-}
-
-export interface SaveRecipeResponse {
-  timeStamp: string;
-  statusCode: number;
-  status: string;
-  message: string;
-  data: SaveRecipeDataObject;
-}
-
-interface SaveRecipeDataObject {
-  recipe: DetailedRecipe;
-}
+import { Ingredient } from 'src/app/model/ingredient.model';
 
 export interface SaveIngredientResponse {
   timeStamp: string;

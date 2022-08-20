@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/service/auth.service';
 import { Subscription } from 'rxjs';
-import { DataStorageService } from '../../service/data-storage.service';
+import { RecipeApiService } from 'src/app/api/recipe/recipe-api.service';
 
 @Component({
   selector: 'app-header',
@@ -14,7 +14,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   constructor(
     private authService: AuthService,
-    private dataStorageService: DataStorageService
+    private recipeApiService: RecipeApiService
   ) {}
 
   ngOnInit(): void {
@@ -24,11 +24,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   onSaveData() {
-    this.dataStorageService.storeMultipleRecipes();
+    this.recipeApiService.storeMultipleRecipes();
   }
 
   onFetchData() {
-    this.dataStorageService.fetchRecipes().subscribe();
+    this.recipeApiService.fetchRecipes().subscribe();
   }
 
   onLogout() {

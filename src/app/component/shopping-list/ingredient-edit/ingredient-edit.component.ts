@@ -1,13 +1,7 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import {
-  Form,
-  FormControl,
-  FormGroup,
-  NgForm,
-  Validators,
-} from '@angular/forms';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { DataStorageService } from 'src/app/service/data-storage.service';
+import { ShoppingListApiService } from 'src/app/api/shopping-list/shopping-list-api.service';
 import { Ingredient } from '../../../model/ingredient.model';
 import { ShoppingListService } from '../../../service/shopping-list.service';
 
@@ -25,7 +19,7 @@ export class IngredientEditComponent implements OnInit, OnDestroy {
 
   constructor(
     private shoppingListService: ShoppingListService,
-    private dataStorageService: DataStorageService
+    private shoppingListApiService: ShoppingListApiService
   ) {}
 
   ngOnInit(): void {
@@ -53,7 +47,7 @@ export class IngredientEditComponent implements OnInit, OnDestroy {
     } else {
       this.shoppingListService.addIngredient(this.ingredientForm.value);
       console.log(this.ingredientForm.value);
-      this.dataStorageService.saveShoppingListIngredient(
+      this.shoppingListApiService.saveShoppingListIngredient(
         this.ingredientForm.value
       );
     }
@@ -68,6 +62,9 @@ export class IngredientEditComponent implements OnInit, OnDestroy {
 
   onDelete() {
     this.shoppingListService.deleteIngredient(this.editedItemIndex);
+    this.shoppingListApiService.deleteShoppingListIngredient(
+      this.editedItemIndex
+    );
     this.onClear();
   }
 

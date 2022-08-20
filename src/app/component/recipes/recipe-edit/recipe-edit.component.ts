@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { DataStorageService } from 'src/app/service/data-storage.service';
+import { RecipeApiService } from 'src/app/api/recipe/recipe-api.service';
 import { RecipeService } from '../../../service/recipe.service';
 
 @Component({
@@ -17,7 +17,7 @@ export class RecipeEditComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private recipeService: RecipeService,
-    private dataStorageService: DataStorageService,
+    private recipeApiService: RecipeApiService,
     private router: Router
   ) {}
 
@@ -35,7 +35,7 @@ export class RecipeEditComponent implements OnInit {
     } else {
       this.recipeService.addRecipe(this.recipeForm.value);
       console.log(this.recipeForm.value);
-      this.dataStorageService.saveRecipe(this.recipeForm.value);
+      this.recipeApiService.saveRecipe(this.recipeForm.value);
     }
     this.onCancel();
   }
