@@ -35,8 +35,8 @@ export class IngredientEditComponent implements OnInit, OnDestroy {
         this.editedItem = this.shoppingListService.getIngredient(index);
         this.editMode = true;
         this.ingredientForm.setValue({
-          ingredient: this.editedItem.name,
-          quantity: this.editedItem.amount,
+          name: this.editedItem.name,
+          amount: this.editedItem.amount,
           unit: this.editedItem.unit,
         });
       }
@@ -53,7 +53,9 @@ export class IngredientEditComponent implements OnInit, OnDestroy {
     } else {
       this.shoppingListService.addIngredient(this.ingredientForm.value);
       console.log(this.ingredientForm.value);
-      this.dataStorageService.saveIngredient(this.ingredientForm.value);
+      this.dataStorageService.saveShoppingListIngredient(
+        this.ingredientForm.value
+      );
     }
     this.editMode = false;
     this.ingredientForm.reset();
@@ -74,23 +76,23 @@ export class IngredientEditComponent implements OnInit, OnDestroy {
   }
 
   initForm() {
-    let ingredient = '';
+    let name = '';
     let unit = '';
-    let quantity; // = 0;
+    let amount; // = 0;
 
     if (this.editMode) {
-      const pantryIngredient = this.shoppingListService.getIngredient(
+      const shoppingListIngredient = this.shoppingListService.getIngredient(
         this.editedItemIndex
       );
-      ingredient = pantryIngredient.name;
-      unit = pantryIngredient.unit;
-      quantity = pantryIngredient.amount;
+      name = shoppingListIngredient.name;
+      unit = shoppingListIngredient.unit;
+      amount = shoppingListIngredient.amount;
     }
 
     this.ingredientForm = new FormGroup({
-      ingredient: new FormControl(ingredient, [Validators.required]),
+      name: new FormControl(name, [Validators.required]),
       unit: new FormControl(unit),
-      quantity: new FormControl(quantity, [
+      amount: new FormControl(amount, [
         Validators.required,
         Validators.pattern(/^[1-9]+[0-9]*$/),
       ]),

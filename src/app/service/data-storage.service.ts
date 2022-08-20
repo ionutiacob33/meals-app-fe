@@ -4,8 +4,10 @@ import { RecipeService } from './recipe.service';
 import {
   GetAllPantryIngredientsResponse,
   GetAllRecipesResponse,
+  GetAllShoppingListIngredientsResponse,
   SaveIngredientResponse,
   SaveRecipeResponse,
+  SaveShoppingListIngredientResponse,
 } from '../model/data.model';
 import { exhaustMap, take, tap } from 'rxjs';
 import { AuthService } from './auth.service';
@@ -62,32 +64,33 @@ export class DataStorageService {
     );
   }
 
-  saveIngredient(ingredient: Ingredient) {
+  saveShoppingListIngredient(ingredient: Ingredient) {
     this.http
-      .post<SaveIngredientResponse>(
-        'http://localhost:8080/api/pantry',
+      .post<SaveShoppingListIngredientResponse>(
+        'http://localhost:8080/api/shopping',
         ingredient
       )
       .subscribe((response) => {
-        ingredient = response.data.pantryIngredient;
+        ingredient = response.data.shoppingListIngredient;
         console.log(ingredient);
       });
   }
 
-  fetchIngredients() {
+  fetchShoppingListIngredients() {
     this.shoppingListService.clearIngredients();
     this.http
-      .get<GetAllPantryIngredientsResponse>(
-        'http://localhost:8080/api/pantry/user'
+      .get<GetAllShoppingListIngredientsResponse>(
+        'http://localhost:8080/api/shopping/user'
       )
       .subscribe((response) => {
         if (response.status === 'OK' && response.statusCode === 200) {
           this.shoppingListService.addIngredients(
-            response.data.pantryIngredients
+            response.data.shoppingListIngredients
           );
+          console.log(response.data.shoppingListIngredients);
         } else {
           alert(
-            'Error retrieving pantry ingredients ' +
+            'Error retrieving shopping list ingredients ' +
               response.message +
               ' please try again'
           );
