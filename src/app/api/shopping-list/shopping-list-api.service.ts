@@ -4,6 +4,7 @@ import { ShoppingListService } from 'src/app/service/shopping-list.service';
 import { AuthService } from 'src/app/service/auth.service';
 import { Ingredient } from 'src/app/model/ingredient.model';
 import {
+  DeleteShoppingListIngredientResponse,
   GetAllShoppingListIngredientsResponse,
   SaveShoppingListIngredientResponse,
 } from './shopping-list-api.model';
@@ -52,6 +53,21 @@ export class ShoppingListApiService {
   }
 
   deleteShoppingListIngredient(editedItemIndex: number) {
-    throw new Error('Method not implemented.');
+    this.http
+      .delete<DeleteShoppingListIngredientResponse>(
+        'http://localhost:8080/api/shopping/' + editedItemIndex
+      )
+      .subscribe((response) => {
+        if (response.status === 'OK' && response.statusCode === 200) {
+          console.log(response.data.deleteSuccess);
+        } else {
+          alert(
+            'Error deleting shopping list ingredient ' +
+              response.message +
+              ' please try again'
+          );
+          this.authService.refreshAuthToken();
+        }
+      });
   }
 }

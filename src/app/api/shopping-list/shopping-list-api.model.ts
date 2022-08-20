@@ -47,3 +47,15 @@ export interface GetAllShoppingListIngredientsResponse {
 interface GetShoppingListDataObject {
   shoppingListIngredients: Ingredient[];
 }
+
+export interface DeleteShoppingListIngredientResponse {
+  timeStamp: string;
+  statusCode: number;
+  status: string;
+  message: string;
+  data: DeleteShoppingListIngredientDataObject;
+}
+
+interface DeleteShoppingListIngredientDataObject {
+  deleteSuccess: boolean;
+}

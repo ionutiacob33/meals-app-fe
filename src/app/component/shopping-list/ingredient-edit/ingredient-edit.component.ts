@@ -63,7 +63,7 @@ export class IngredientEditComponent implements OnInit, OnDestroy {
   onDelete() {
     this.shoppingListService.deleteIngredient(this.editedItemIndex);
     this.shoppingListApiService.deleteShoppingListIngredient(
-      this.editedItemIndex
+      this.editedItem.id
     );
     this.onClear();
   }
