@@ -56,6 +56,45 @@
       </div>
       <br />
       <div class="row">
+        <div class="col-sm-12">
+          <div class="form-group">
+            <label for="title">Recipe Source</label>
+            <input
+              type="text"
+              id="source"
+              formControlName="source"
+              class="form-control"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="form-group">
+            <label for="title">Recipe Url</label>
+            <input
+              type="text"
+              id="url"
+              formControlName="url"
+              class="form-control"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="form-group">
+            <label for="title">Recipe Yeald</label>
+            <input
+              type="number"
+              id="yeald"
+              formControlName="yeald"
+              class="form-control"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="row">
         <div class="col-xs-12">
           <div class="form-group">
             <label for="description">Description</label>
@@ -103,7 +142,7 @@
               </button>
             </div>
           </div>
-          <hr />
+          <br />
           <div class="row">
             <div class="col-xs-12">
               <button
@@ -117,6 +156,7 @@
           </div>
         </div>
       </div>
+      <hr />
       <div class="row">
         <div class="col-xs-12" formArrayName="recipeSteps">
           <div
@@ -149,7 +189,7 @@
               </button>
             </div>
           </div>
-          <hr />
+          <br />
           <div class="row">
             <div class="col-xs-12">
               <button
@@ -163,6 +203,67 @@
           </div>
         </div>
       </div>
+      <hr />
+      <div class="row">
+        <div class="col-xs-12" formArrayName="recipeCookingTimes">
+          <div
+            class="row"
+            *ngFor="
+              let cookingTimeCtrl of cookingTimesArray.controls;
+              let i = index
+            "
+            [formGroupName]="i"
+            style="margin-top: 10px"
+          >
+            <div class="col-sm-4">
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Title"
+                formControlName="title"
+              />
+            </div>
+            <div class="col-sm-3">
+              <input
+                type="number"
+                class="form-control"
+                placeholder="Hours"
+                formControlName="hours"
+              />
+            </div>
+            <div class="col-sm-3">
+              <input
+                type="number"
+                class="form-control"
+                placeholder="Minutes"
+                formControlName="minutes"
+              />
+            </div>
+            <div class="col-sm-2">
+              <button
+                type="button"
+                class="btn btn-danger"
+                (click)="onDeleteCookingTime(i)"
+              >
+                X
+              </button>
+            </div>
+          </div>
+          <br />
+          <div class="row">
+            <div class="col-xs-12">
+              <button
+                type="button"
+                class="btn btn-success"
+                (click)="onAddCookingTime()"
+              >
+                Add Cooking Time
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
     </form>
   </div>
 </div>
+<br />

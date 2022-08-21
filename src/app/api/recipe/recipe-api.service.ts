@@ -43,6 +43,7 @@ export class RecipeApiService {
       }),
       tap((response) => {
         if (response.status === 'OK' && response.statusCode === 200) {
+          console.log(response.data.recipes);
           this.recipeService.setRecipes(response.data.recipes);
         } else {
           alert(

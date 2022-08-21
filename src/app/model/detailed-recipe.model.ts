@@ -11,7 +11,7 @@ export class DetailedRecipe {
     public imageUrl: string,
     public ingredients: Ingredient[],
     public steps: Step[],
-    public cookingTime: CookingTime[],
+    public cookingTimes: CookingTime[],
     public source: string,
     public url: string,
     public yeald: number
