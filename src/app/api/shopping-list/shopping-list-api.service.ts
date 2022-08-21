@@ -5,6 +5,7 @@ import { AuthService } from 'src/app/service/auth.service';
 import { Ingredient } from 'src/app/model/ingredient.model';
 import {
   DeleteShoppingListIngredientResponse,
+  EditShoppingListIngredientResponse,
   GetAllShoppingListIngredientsResponse,
   SaveShoppingListIngredientResponse,
 } from './shopping-list-api.model';
@@ -44,6 +45,29 @@ export class ShoppingListApiService {
         } else {
           alert(
             'Error retrieving shopping list ingredients ' +
+              response.message +
+              ' please try again'
+          );
+          this.authService.refreshAuthToken();
+        }
+      });
+  }
+
+  editShoppingListIngredient(
+    editedItemIndex: number,
+    newIngredient: Ingredient
+  ) {
+    this.http
+      .put<EditShoppingListIngredientResponse>(
+        'http://localhost:8080/api/shopping/' + editedItemIndex,
+        newIngredient
+      )
+      .subscribe((response) => {
+        if (response.status === 'OK' && response.statusCode === 200) {
+          console.log(response.data.shoppingListIngredient);
+        } else {
+          alert(
+            'Error editing shopping list ingredient ' +
               response.message +
               ' please try again'
           );

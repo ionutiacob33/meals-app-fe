@@ -48,6 +48,18 @@ interface GetShoppingListDataObject {
   shoppingListIngredients: Ingredient[];
 }
 
+export interface EditShoppingListIngredientResponse {
+  timeStamp: string;
+  statusCode: number;
+  status: string;
+  message: string;
+  data: EditShoppingListIngredientDataObject;
+}
+
+interface EditShoppingListIngredientDataObject {
+  shoppingListIngredient: Ingredient;
+}
+
 export interface DeleteShoppingListIngredientResponse {
   timeStamp: string;
   statusCode: number;

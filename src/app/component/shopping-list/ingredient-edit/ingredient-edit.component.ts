@@ -44,6 +44,10 @@ export class IngredientEditComponent implements OnInit, OnDestroy {
         this.editedItemIndex,
         this.ingredientForm.value
       );
+      this.shoppingListApiService.editShoppingListIngredient(
+        this.editedItem.id,
+        this.ingredientForm.value
+      );
     } else {
       this.shoppingListService.addIngredient(this.ingredientForm.value);
       console.log(this.ingredientForm.value);
