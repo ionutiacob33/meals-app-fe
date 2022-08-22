@@ -3,7 +3,11 @@ import { Injectable } from '@angular/core';
 import { DetailedRecipe } from 'src/app/model/detailed-recipe.model';
 import { AuthService } from 'src/app/service/auth.service';
 import { RecipeService } from 'src/app/service/recipe.service';
-import { GetAllRecipesResponse, SaveRecipeResponse } from './recipe-api.model';
+import {
+  EditRecipeResponse,
+  GetAllRecipesResponse,
+  SaveRecipeResponse,
+} from './recipe-api.model';
 import { exhaustMap, take, tap } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
@@ -53,5 +57,25 @@ export class RecipeApiService {
         }
       })
     );
+  }
+
+  editRecipe(editedItemIndex: number, newRecipe: DetailedRecipe) {
+    console.log(newRecipe);
+    newRecipe.id = editedItemIndex;
+    this.http
+      .put<EditRecipeResponse>(
+        'http://localhost:8080/api/recipe/' + editedItemIndex,
+        newRecipe
+      )
+      .subscribe((response) => {
+        if (response.status === 'OK' && response.statusCode === 200) {
+          console.log(response.data.recipe);
+        } else {
+          alert(
+            'Error editing recipe ' + response.message + ' please try again'
+          );
+          this.authService.refreshAuthToken();
+        }
+      });
   }
 }

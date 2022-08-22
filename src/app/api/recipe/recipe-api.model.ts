@@ -23,3 +23,15 @@ export interface SaveRecipeResponse {
 interface SaveRecipeDataObject {
   recipe: DetailedRecipe;
 }
+
+export interface EditRecipeResponse {
+  timeStamp: string;
+  statusCode: number;
+  status: string;
+  message: string;
+  data: EditRecipeDataObject;
+}
+
+interface EditRecipeDataObject {
+  recipe: DetailedRecipe;
+}
