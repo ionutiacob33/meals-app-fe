@@ -4,6 +4,7 @@ import { DetailedRecipe } from 'src/app/model/detailed-recipe.model';
 import { AuthService } from 'src/app/service/auth.service';
 import { RecipeService } from 'src/app/service/recipe.service';
 import {
+  DeleteRecipeResponse,
   EditRecipeResponse,
   GetAllRecipesResponse,
   SaveRecipeResponse,
@@ -73,6 +74,21 @@ export class RecipeApiService {
         } else {
           alert(
             'Error editing recipe ' + response.message + ' please try again'
+          );
+          this.authService.refreshAuthToken();
+        }
+      });
+  }
+
+  deleteRecipe(id: number) {
+    this.http
+      .delete<DeleteRecipeResponse>('http://localhost:8080/api/recipe/' + id)
+      .subscribe((response) => {
+        if (response.status === 'OK' && response.statusCode === 200) {
+          console.log(response.data.recipeDeleted);
+        } else {
+          alert(
+            'Error deleting recipe ' + response.message + ' please try again'
           );
           this.authService.refreshAuthToken();
         }

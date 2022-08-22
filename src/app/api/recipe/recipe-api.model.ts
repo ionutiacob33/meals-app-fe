@@ -35,3 +35,15 @@ export interface EditRecipeResponse {
 interface EditRecipeDataObject {
   recipe: DetailedRecipe;
 }
+
+export interface DeleteRecipeResponse {
+  timeStamp: string;
+  statusCode: number;
+  status: string;
+  message: string;
+  data: DeleteRecipeDataObject;
+}
+
+interface DeleteRecipeDataObject {
+  recipeDeleted: boolean;
+}

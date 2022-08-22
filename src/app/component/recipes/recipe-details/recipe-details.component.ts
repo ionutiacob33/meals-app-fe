@@ -3,6 +3,7 @@ import { DetailedRecipe } from '../../../model/detailed-recipe.model';
 import { RecipeService } from '../../../service/recipe.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { ShoppingListService } from '../../../service/shopping-list.service';
+import { RecipeApiService } from 'src/app/api/recipe/recipe-api.service';
 
 @Component({
   selector: 'app-recipe-details',
@@ -15,6 +16,7 @@ export class RecipeDetailsComponent implements OnInit {
 
   constructor(
     private recipeService: RecipeService,
+    private recipeApiService: RecipeApiService,
     private shoppingListService: ShoppingListService,
     private router: Router,
     private route: ActivatedRoute
@@ -33,7 +35,10 @@ export class RecipeDetailsComponent implements OnInit {
   }
 
   onDeleteRecipe() {
+    let recipeToDelete = this.recipeService.getRecipe(this.id);
     this.recipeService.deleteRecipe(this.id);
+    this.recipeApiService.deleteRecipe(recipeToDelete.id);
+
     this.router.navigate(['../'], { relativeTo: this.route });
   }
 
