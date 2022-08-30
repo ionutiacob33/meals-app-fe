@@ -4,6 +4,7 @@ import { RecipeService } from '../../../service/recipe.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { ShoppingListService } from '../../../service/shopping-list.service';
 import { RecipeApiService } from 'src/app/api/recipe/recipe-api.service';
+import { ShoppingListApiService } from 'src/app/api/shopping-list/shopping-list-api.service';
 
 @Component({
   selector: 'app-recipe-details',
@@ -18,6 +19,7 @@ export class RecipeDetailsComponent implements OnInit {
     private recipeService: RecipeService,
     private recipeApiService: RecipeApiService,
     private shoppingListService: ShoppingListService,
+    private shoppingListApiService: ShoppingListApiService,
     private router: Router,
     private route: ActivatedRoute
   ) {}
@@ -44,6 +46,9 @@ export class RecipeDetailsComponent implements OnInit {
 
   onAddToShoppingList() {
     this.shoppingListService.addIngredients(this.recipe.ingredients);
+    this.shoppingListApiService.saveMultipleShoppingListIngredients(
+      this.recipe.ingredients
+    );
     this.router.navigate(['../'], { relativeTo: this.route });
   }
 }

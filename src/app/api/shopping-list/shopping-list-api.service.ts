@@ -7,6 +7,7 @@ import {
   DeleteShoppingListIngredientResponse,
   EditShoppingListIngredientResponse,
   GetAllShoppingListIngredientsResponse,
+  SaveMultipleShoppingListIngredientsResponse,
   SaveShoppingListIngredientResponse,
 } from './shopping-list-api.model';
 
@@ -27,6 +28,18 @@ export class ShoppingListApiService {
       .subscribe((response) => {
         ingredient = response.data.shoppingListIngredient;
         console.log(ingredient);
+      });
+  }
+
+  saveMultipleShoppingListIngredients(ingredients: Ingredient[]) {
+    this.http
+      .post<SaveMultipleShoppingListIngredientsResponse>(
+        'http://localhost:8080/api/shopping/multiple',
+        ingredients
+      )
+      .subscribe((response) => {
+        ingredients = response.data.shoppingListIngredients;
+        console.log(ingredients);
       });
   }
 

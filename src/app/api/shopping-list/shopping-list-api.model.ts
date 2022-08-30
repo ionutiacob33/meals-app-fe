@@ -24,6 +24,18 @@ interface SaveShoppingListIngredientDataObject {
   shoppingListIngredient: Ingredient;
 }
 
+export interface SaveMultipleShoppingListIngredientsResponse {
+  timeStamp: string;
+  statusCode: number;
+  status: string;
+  message: string;
+  data: SaveMultipleShoppingListIngredientDataObject;
+}
+
+interface SaveMultipleShoppingListIngredientDataObject {
+  shoppingListIngredients: Ingredient[];
+}
+
 export interface GetAllPantryIngredientsResponse {
   timeStamp: string;
   statusCode: number;
