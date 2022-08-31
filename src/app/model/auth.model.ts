@@ -23,3 +23,15 @@ interface UserDetails {
   created: string;
   enabled: boolean;
 }
+
+export interface AccountVerificationResponse {
+  timeStamp: string;
+  statusCode: number;
+  status: string;
+  message: string;
+  data: AccountVerificationDataObject;
+}
+
+interface AccountVerificationDataObject {
+  token: string;
+}

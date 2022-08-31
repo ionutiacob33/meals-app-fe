@@ -6,6 +6,7 @@ import { AuthComponent } from './component/auth/auth.component';
 import { RecipeDetailsComponent } from './component/recipes/recipe-details/recipe-details.component';
 import { RecipeEditComponent } from './component/recipes/recipe-edit/recipe-edit.component';
 import { AuthGuard } from './guard/auth-guard';
+import { AccountVerificationComponent } from './component/auth/account-verification/account-verification.component';
 
 const appRoutes: Routes = [
   {
@@ -22,6 +23,10 @@ const appRoutes: Routes = [
     path: 'shopping-list',
     component: ShoppingListComponent,
     canActivate: [AuthGuard],
+  },
+  {
+    path: 'accountVerification/:token',
+    component: AccountVerificationComponent,
   },
   { path: 'auth', component: AuthComponent },
   { path: '', redirectTo: '/recipes', pathMatch: 'full' },

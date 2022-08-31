@@ -4,7 +4,11 @@ import {
   HttpErrorResponse,
   HttpHeaders,
 } from '@angular/common/http';
-import { LoginResponse, SignUpResponse } from '../model/auth.model';
+import {
+  AccountVerificationResponse,
+  LoginResponse,
+  SignUpResponse,
+} from '../model/auth.model';
 import { BehaviorSubject, catchError, tap, throwError } from 'rxjs';
 import { User } from '../model/user.model';
 import { Router } from '@angular/router';
@@ -26,6 +30,12 @@ export class AuthService {
         username: username,
         password: password,
       }
+    );
+  }
+
+  activateUser(token: string) {
+    return this.http.get<AccountVerificationResponse>(
+      'http://localhost:8080/api/auth/accountVerification/' + token
     );
   }
 
