@@ -24,6 +24,12 @@ export class AuthInterceptorService implements HttpInterceptor {
           return next.handle(req);
         } else if (req.url === 'http://localhost:8080/api/auth/token/refresh') {
           return next.handle(req);
+        } else if (req.url === 'http://localhost:8080/api/image/upload') {
+          const headers = new HttpHeaders({
+            Authorization: `Bearer ${user.token}`,
+          });
+          const modifiedReq = req.clone({ headers: headers });
+          return next.handle(modifiedReq);
         } else {
           const headers = new HttpHeaders({
             'Content-Type': 'application/json',

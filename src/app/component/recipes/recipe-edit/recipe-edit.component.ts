@@ -4,6 +4,10 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { RecipeApiService } from 'src/app/api/recipe/recipe-api.service';
 import { DetailedRecipe } from 'src/app/model/detailed-recipe.model';
 import { RecipeService } from '../../../service/recipe.service';
+import {
+  AngularFireStorage,
+  AngularFireUploadTask,
+} from '@angular/fire/compat/storage';
 
 @Component({
   selector: 'app-recipe-edit',
@@ -15,12 +19,19 @@ export class RecipeEditComponent implements OnInit {
   editedItemIndex!: number;
   editedItem!: DetailedRecipe;
   recipeForm!: FormGroup;
+  isUrlMode = true;
+  selectedFile!: File;
+  percentage!: number;
+  private basePath = '/uploads';
+  downloadableURL = '';
+  task!: AngularFireUploadTask;
 
   constructor(
     private route: ActivatedRoute,
     private recipeService: RecipeService,
     private recipeApiService: RecipeApiService,
-    private router: Router
+    private router: Router,
+    private fireStorage: AngularFireStorage
   ) {}
 
   ngOnInit(): void {
@@ -32,7 +43,27 @@ export class RecipeEditComponent implements OnInit {
     });
   }
 
+  onSwitchMode() {
+    this.isUrlMode = !this.isUrlMode;
+  }
+
+  async onFileChanged(event: any) {
+    const file = event.target.files[0];
+    if (file) {
+      const filePath = `${this.basePath}/${file.name}`;
+      this.task = this.fireStorage.upload(filePath, file);
+
+      (await this.task).ref.getDownloadURL().then((url) => {
+        this.downloadableURL = url;
+      });
+    } else {
+      alert('No images selected');
+      this.downloadableURL = '';
+    }
+  }
+
   onSubmit() {
+    this.recipeForm.value.imageUrl = this.downloadableURL;
     if (this.editMode) {
       //TODO check where the value is lost
       this.recipeService.updateRecipe(
@@ -189,9 +220,9 @@ export class RecipeEditComponent implements OnInit {
 
     this.recipeForm = new FormGroup({
       title: new FormControl(recipeTitle, [Validators.required]),
-      imageUrl: new FormControl(recipeImageUrl, [Validators.required]),
+      imageUrl: new FormControl(recipeImageUrl),
       source: new FormControl(recipeSource, [Validators.required]),
-      url: new FormControl(recipeUrl, [Validators.required]),
+      url: new FormControl(recipeUrl),
       yeald: new FormControl(recipeYeald, [Validators.required]),
       description: new FormControl(recipeDescription, [Validators.required]),
       ingredients: recipeIngredients,

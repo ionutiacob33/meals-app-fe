@@ -4,6 +4,15 @@
 
 export const environment = {
   production: false,
+  firebase: {
+    apiKey: 'AIzaSyCmdpXuGAmVp1b-YuUhZNHlFIfS1-PhyQM',
+    authDomain: 'fir-meal-image.firebaseapp.com',
+    projectId: 'fir-meal-image',
+    storageBucket: 'fir-meal-image.appspot.com',
+    messagingSenderId: '1092949922681',
+    appId: '1:1092949922681:web:a422fcb33a98ca802815a8',
+    measurementId: 'G-FR86WVWGVG',
+  },
 };
 
 /*
