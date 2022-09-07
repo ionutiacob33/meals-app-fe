@@ -13,8 +13,6 @@ import { exhaustMap, take, tap } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class RecipeApiService {
-  private retrievedImage!: any;
-
   constructor(
     private http: HttpClient,
     private recipeService: RecipeService,
@@ -41,14 +39,9 @@ export class RecipeApiService {
   }
 
   fetchRecipes() {
-    return this.authService.user.pipe(
-      take(1),
-      exhaustMap((user) => {
-        return this.http.get<GetAllRecipesResponse>(
-          'http://localhost:8080/api/recipe/user'
-        );
-      }),
-      tap((response) => {
+    this.http
+      .get<GetAllRecipesResponse>('http://localhost:8080/api/recipe/user')
+      .subscribe((response) => {
         if (response.status === 'OK' && response.statusCode === 200) {
           console.log(response.data.recipes);
           this.recipeService.setRecipes(response.data.recipes);
@@ -58,8 +51,7 @@ export class RecipeApiService {
           );
           this.authService.refreshAuthToken();
         }
-      })
-    );
+      });
   }
 
   editRecipe(editedItemIndex: number, newRecipe: DetailedRecipe) {
@@ -95,29 +87,5 @@ export class RecipeApiService {
           this.authService.refreshAuthToken();
         }
       });
-  }
-
-  saveRecipeImage(imageFormData: FormData) {
-    console.log(imageFormData);
-    this.http
-      .post('http://localhost:8080/api/image/upload', imageFormData)
-      .subscribe((response: any) => {
-        if (response.status === 200) {
-          console.log('Success');
-        } else {
-          console.log('Fail');
-        }
-      });
-  }
-
-  getImage(recipeId: string) {
-    this.http
-      .get('http://localhost:8080/api/image/get/' + recipeId)
-      .subscribe((res) => {
-        let retrieveResonse: any = res;
-        let base64Data = retrieveResonse.picByte;
-        this.retrievedImage = 'data:image/jpeg;base64,' + base64Data;
-      });
-    return this.retrievedImage;
   }
 }

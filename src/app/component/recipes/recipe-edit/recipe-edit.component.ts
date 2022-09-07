@@ -63,7 +63,8 @@ export class RecipeEditComponent implements OnInit {
   }
 
   onSubmit() {
-    this.recipeForm.value.imageUrl = this.downloadableURL;
+    if (this.downloadableURL !== '')
+      this.recipeForm.value.imageUrl = this.downloadableURL;
     if (this.editMode) {
       //TODO check where the value is lost
       this.recipeService.updateRecipe(

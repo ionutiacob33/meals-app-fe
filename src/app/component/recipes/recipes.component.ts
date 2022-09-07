@@ -10,7 +10,7 @@ export class RecipesComponent implements OnInit {
   constructor(private recipeApiService: RecipeApiService) {}
 
   ngOnInit(): void {
-    this.recipeApiService.fetchRecipes().subscribe();
+    this.recipeApiService.fetchRecipes();
     console.log('Fetching from DB');
   }
 }
